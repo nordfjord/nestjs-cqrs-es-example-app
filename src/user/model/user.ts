@@ -1,16 +1,12 @@
 import { ConflictException } from '@nestjs/common'
-import { AggregateRoot } from '@nestjs/cqrs'
 import { hash, genSalt } from 'bcrypt'
-import { Event } from '@nordfjord/nestjs-cqrs-es'
+import { Event, AggregateRoot } from '@nordfjord/nestjs-cqrs-es'
 import { UserRegistered } from '../events/user-registered.event'
 
 export class User extends AggregateRoot<Event> {
   private isRegistered = false
   private email: string
   private passwordHash: string
-  constructor(private id: string) {
-    super()
-  }
 
   async register(email: string, password: string) {
     if (this.isRegistered) throw new ConflictException()
