@@ -1,4 +1,4 @@
-import { CqrsModule, IEvent } from '@nestjs/cqrs'
+import { CqrsModule } from '@nestjs/cqrs'
 import { Test, TestingModule } from '@nestjs/testing'
 import { RegisterUserHandler } from './command/handler/register-user.handler'
 import { User } from './model/user'
@@ -28,7 +28,7 @@ describe('UserController', () => {
   })
 
   it('should register a user', async () => {
-    const result = await controller.register({
+    await controller.register({
       email: 'test@example.com',
       password: '12345',
     })
@@ -40,7 +40,7 @@ describe('UserController', () => {
   })
 
   it('should disallow repeat registrations', async () => {
-    const result = await controller.register({
+    await controller.register({
       email: 'test@example.com',
       password: '12345',
     })

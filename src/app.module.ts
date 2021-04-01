@@ -19,13 +19,5 @@ import { CqrsModule, EventBus } from '@nestjs/cqrs';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements OnModuleInit {
-  constructor(
-    private readonly eventStore: EventStore,
-    private readonly eventBus: EventBus<Event>,
-  ) {}
-
-  async onModuleInit() {
-    this.eventBus.publisher = this.eventStore;
-  }
+export class AppModule {
 }
